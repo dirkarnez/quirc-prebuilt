@@ -24,7 +24,7 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           msystem: MINGW64
-          install: make autoconf automake libtool autogen perl
+          install: make autoconf automake libtool autogen pkg-config
           
       - name: curl x86_64-8.1.0-release-posix-seh-rt_v6-rev0.7z
         shell: cmd
@@ -40,7 +40,8 @@ jobs:
           cd quirc && 
           export PATH="$workspace/mingw64:$workspace/mingw64/bin:$workspace/msys64/usr/bin:/usr/bin" &&
           g++ --version && 
-          CC="gcc" CXX="g++" make libquirc.a && make libquirc.so
+          CC="gcc" CXX="g++" make libquirc.a && 
+          CC="gcc" CXX="g++" make libquirc.so
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
