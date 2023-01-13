@@ -40,7 +40,7 @@ jobs:
           cd quirc && 
           export PATH="$workspace/mingw64:$workspace/mingw64/bin:$workspace/msys64/usr/bin:/usr/bin" &&
           g++ --version && 
-          CC="gcc" CXX="g++" make && make libquirc.a libquirc.so
+          CC="gcc" CXX="g++" make libquirc.a && make libquirc.so
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
