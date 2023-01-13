@@ -41,18 +41,19 @@ jobs:
           export PATH="$workspace/mingw64:$workspace/mingw64/bin:$workspace/msys64/usr/bin:/usr/bin" &&
           g++ --version && 
           CC="gcc" CXX="g++" make libquirc.a && 
-          CC="gcc" CXX="g++" make libquirc.so
+          CC="gcc" CXX="g++" make libquirc.so &&
+          PREFIX="${{ env.installationPath }}" make install
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          directory: "quirc"
+          directory: "quirc/${{ env.installationPath }}"
           filename: "${{ env.mingwTargetZip }}"
 
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "quirc/${{ env.mingwTargetZip }}"
+          artifacts: "quirc/${{ env.installationPath }}/${{ env.mingwTargetZip }}"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
