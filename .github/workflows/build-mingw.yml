@@ -42,7 +42,7 @@ jobs:
           cd quirc && 
           export PATH="$workspace/mingw64:$workspace/mingw64/bin:$workspace/msys64/usr/bin:/usr/bin" &&
           g++ --version && 
-          make && make install
+          CC="gcc" CXX="g++" make && make install
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
