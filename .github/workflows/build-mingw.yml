@@ -42,7 +42,11 @@ jobs:
           g++ --version && 
           CC="gcc" CXX="g++" make libquirc.a && 
           CC="gcc" CXX="g++" make libquirc.so &&
-          PREFIX="${{ env.installationPath }}" make install
+          mkdir -p ${{ env.installationPath }}/include && 
+          mkdir -p ${{ env.installationPath }}/lib && 
+          cp -f ./lib/quirc.h ${{ env.installationPath }}/include &&
+          cp -f ./libquirc.a ${{ env.installationPath }}/lib &&
+          cp -f ./libquirc.so.* ${{ env.installationPath }}/lib
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
